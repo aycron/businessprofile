@@ -1,0 +1,38 @@
+<dl>
+	<dt>
+		<label> <%= column.label %> </label>
+	</dt>
+	<dd>
+		<table class="permissions" id="permissions_<%= @record.id %>">
+		<% if @record.is_super_admin %>
+			<tr>
+				<td>This role is the super admin. It has all the permissions.</td>
+			</tr>
+		<% else %>
+			<tr>
+				<td></td>
+				<td>none</td>
+				<td>view</td>
+				<td>edit</td>
+			</tr>
+			<% controllers = get_controllers_list %>
+			<% controllers.each do |controller| %>
+				<tr>
+					<td><%= controller %></td>
+					<% 
+						name = "record[permissions][" + controller + "]"
+						selections = [true, false, false]
+						if not @record.id.nil?
+							roleController = RoleController.find(:first, :conditions => {:role_id => @record.id, :controller => controller}) 
+							selections = [(not roleController.can_view and not roleController.can_edit), (roleController.can_view and not roleController.can_edit), roleController.can_edit] unless roleController.nil?
+						end
+					%>
+					<td><%= radio_button_tag name, 0, selections[0] %></td>
+					<td><%= radio_button_tag name, 1, selections[1] %></td>
+					<td><%= radio_button_tag name, 2, selections[2] %></td>
+				</tr>
+			<% end %>
+		<% end %>
+		</table>
+	</dd>
+</dl>

@@ -1,0 +1,33 @@
+RolloverBeethoven
+=================
+
+28/04/2008 Notes
+Not to be horribly self-conscious, but really, WTF is up with that name?!?  Anyhoo...
+
+Overview
+--------
+This is a straightforward set of helpers to make pretty rollover images and section titles, using ImageMagick and TTF fonts.  The fonts should go in #{RAILS_ROOT}/fonts.  If the specified font doesn't exist, ImageMagick will still generate text using it's default font.
+
+RB will create it's images in /public/images/auto.  This directory is not created automatically, so you will need to manually create it and give it appropriate permissions.
+
+Once included in your /vendor/plugins tree, RB should be ready to roll.  The two primary helpers are 'graph_text' and 'rollover'.  Each of these takes an option hash, as described in the plugins' /lib/rollover_beethoven.rb file.  At it's most basic:
+
+  rollover :text => 'The Rapture Index', :link => 'http://www.raptureready.com/rap2.html'
+    -- or --
+  graph_text :text => 'I AM A SPARTAN IN THE BATTLE OF THEMOPYLAE!!!' # Charlie's post-feeding mantra
+
+There are many, many more potential options to pass in.  There are also variants of 'graph_text' and 'rollover' which return the entire working hash of the call.  These methods are 'graph_text_hash' and 'rollover_hash'.  This is useful if you feed in the :width => :auto option, and need to know how wide it wound up being.  The hash methods return the normal tag as the :tag key.
+
+...include In Your Layout
+-------------------------
+So.... the 'rollover' and 'graph_text' methods will return a div/link construction... you will need to include the generated CSS in the HEAD of the page for all of this to work.  In your layout .rhtml, simply include 'yield :rollover_css' in the HEAD section.  The generated CSS is not particularly pretty (ok, it's god-awful ugly), but it works.
+
+The plugin caches all images in the 'auto' folder, and it crafts the image filename based on a hash of parameters.  During initial setup, however, you'll probably find yourself needing to manually wipe /public/images/auto occasionally -- this is harmless.  Nothing in this directory ever needs to be kept.
+
+To Do
+-----
++ Put in SVN!
++ Add rake task to wipe cache
++ init.tb should create /public/images/auto if it's nonexistant (i.e. first run)
++ rename /public/images/auto to /public/images/rb_cache (or something else more meaningful)
++ fix bugs? :)

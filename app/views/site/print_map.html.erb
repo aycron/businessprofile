@@ -1,0 +1,10 @@
+<html> 
+	<head> 
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no" /> 
+	</head> 
+
+	<body onload="print();"> 
+  		<%= image_tag("http://maps.google.com/staticmap?center=#{@marker.lat},#{@marker.lng}&markers=#{@marker.lat},#{@marker.lng}&zoom=15&size=800x800&key=#{@key}&sensor=false")%>
+		<%= @google_analytics %>
+	</body> 
+</html>

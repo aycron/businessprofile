@@ -1,0 +1,5 @@
+<tr>
+	<td><%= event.event.humanize %></td>
+	<td><%= text_field_tag "values[#{event.id}]" , event.value %></td>
+	<td><%= event.description %></td>
+</tr>

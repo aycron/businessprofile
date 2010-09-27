@@ -1,0 +1,39 @@
+<div class="sidebar-blog">
+		<span  class="title">CATEGORIES</span>
+		<ul class="list-categories">
+			<%for blogCategory in @blogCategories%>
+				<%if not @selectedCategory.nil? and blogCategory.id == @selectedCategory.id%>
+					<li>
+						<%= link_to blogCategory.name, "/blog/category/#{blogCategory.to_param}" %>
+					</li>
+				<%else%>	
+					<li>
+						<%= link_to blogCategory.name, "/blog/category/#{blogCategory.to_param}" %>
+					</li>				
+				<%end%>				
+			<%end%>			
+		</ul>
+		
+		<span  class="title">ARCHIVES</span>
+		<ul class="list-archives">
+			<% for year in @blogPostYear%>
+				<%if not @selectedYear.nil? and year.to_s == @selectedYear%>
+					<li>
+				   		<%= link_to year.to_s, "/blog/year/#{year}" %>
+					</li>
+				<%else%>	
+					<li>
+						<%= link_to year.to_s, "/blog/year/#{year}" %>
+					</li>				
+				<%end%>
+			<%end%>
+		</ul>
+		
+		<div class="search">
+			<span class="title">SEARCH THE BLOG</span>
+			<% form_tag url_for(:controller=>'blog',:action => 'blog_search') do %>
+				<input class="input-search-blog" type="text" name="search" id="search" />
+				<input type="image" class="input2"  src="/images/go.jpg"/>
+			<%end%>
+		</div>
+	</div>

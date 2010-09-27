@@ -1,0 +1,10 @@
+<div id="content_div_<%=@record.id%>" style="<%= (@record.tab_type!='texto' && !@record.tab_type.nil?) ? "visibility: hidden;" : "visibility: visible;" %>">
+	<dl>
+		<dt>
+			<label> <%= column.label %> </label>
+		</dt>
+		<dd>
+			<%= form_column(active_scaffold_config.columns[:content]) %> 
+		</dd>
+	</dl>
+</div>

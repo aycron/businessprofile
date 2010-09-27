@@ -1,0 +1,75 @@
+<!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
+<html>
+
+<head>
+<title> BusinessProfile </title>
+
+
+<%=stylesheet_link_tag "businessprofile"%>
+<%=javascript_include_tag "roundborder"%>
+<!--[if lte IE 8]>
+<%=stylesheet_link_tag "ie"%>	
+<![endif]--> 
+<%=yield :css%>
+
+</head>
+
+<body class="footerBody">
+		<div id="header"> 
+			<div class="headerLeft"> <h1> <img src="/images/businessprofile.png"> </h1> </div>
+			<div class="headerRight"> 
+			    <div id="footer">
+                   	<div id="footer-div2">
+                   		<div id="footer-div-pages">
+                   			<%for page in @pages%>
+								<%=link_to page.title, {:controller => "site", :action => "page", :page_name => page.name}, :class => "footer_link" %>
+                              	<% if @pages.index(page) != @pages.length - 1 %>
+                                	&nbsp;&nbsp;|&nbsp;&nbsp;
+							  	<%end %>
+                            <%end %>
+                        </div>
+                        <div id="footer-div-copyright">
+                            <%=@footer_text %>
+                        </div>
+
+                    </div>
+                </div>
+			<!--<a href="#"><b>Nosotros</b></a> <b>|</b> <a href="#"><b>Ayuda</b></a> <b>|</b> <a href="#"><b>Contáctanos</b></a> <b>|</b> <a href="#"><b>Anúnciate con Nosotros</b></a>-->
+			</div>	
+		</div>
+		<div class="content">
+			<div class="bodyLeft"> 
+				
+					<div id="imagewrapper">
+						<div> 
+							
+							<!--<img src="/images/aycron.png" style="width:288px; border:2px solid; color:#e3e2e2">-->
+							<%=image_tag(@page.photo.url(:small), :style => "width:288px; border: 2px solid #E3E2E2;")%>
+							
+						</div>
+					</div>
+				
+			</div>
+			<div class="bodyRight"> 
+				<div id='lightBlue'> 
+					<!--<div class="lightBlueLeft"><h1>Nosotros</h1></div>-->
+					<div id="title">
+						<%=@page.title%>	
+					</div>
+					<div class="lightBlueRight"> 
+					
+						<%=image_tag '/images/site/imgprint.png', :style => "margin-right:3px;"%><a class="tool-link" onclick="print();" href="#">Imprimir</a>						
+                        &nbsp;<%=image_tag '/images/site/s1-separator2.png', :style => "margin-right:3px;"%>&nbsp;<%=image_tag '/images/site/imgmail.png', :style => "margin-right: 3px;" %><a class="tool-link" href="mailto:">Enviar por Correo</a>
+						
+						
+					</div>
+				</div>
+				<div id='littleHeader'> </div>
+				<div id='littlebody'><div class="littleBodyContent"><%=@page.content%> </div> </div>
+				<div id='littleFooter'> </div>
+			</div>
+		</div>
+</body>
+
+
+</html>

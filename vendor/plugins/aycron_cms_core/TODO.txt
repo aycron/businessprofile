@@ -1,0 +1,9 @@
+- hacer que el install o el environment copien los archivos dentro de public al public principal
+- sincronizar los migrates
+- mejorar los selects para la seguridad x roles
+- hacer que la seguridad sea o por modelo o por controller, pero no como ahora que el modelo se tiene que llamar igual al controller
+   actualmente la seguridad no funciona si el controller se llama de forma diferente al model, como BigPaymentsController y Payment
+- agregar páginas y menu sections
+- agregar newsletter y subscribers
+- hacer que el envío de notificaciones sea asincrónico.
+- hacer que el rollover_beethoven genere las imágenes en el s3 si se usa s3.

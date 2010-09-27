@@ -1,0 +1,75 @@
+/* eric mayer reset */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td 
+{ margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; background: transparent; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+:focus { outline:0; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+td.actions { vertical-align: middle; }
+
+/* general classes & element restore */
+.center { margin: 0 auto; }
+.left { float: left; display:inline; }
+.right { float: right; display:inline; }
+.clear { clear:both; }
+.hide { display: none; }
+.smaller { font-size:0.8em; margin-bottom: 1.875em; margin-bottom: 1.875em; }
+.larger { font-size:1.2em/2.5em; margin-bottom: 1.25em; }
+.top { margin-top:0; padding-top:0; }
+.bottom { margin-bottom:0; padding-bottom:0; }
+.error { border: 1px solid #f00; color: #f00; }
+.textbox { padding: .33em; border: 1px solid #9d9c9c; background: white repeat-x 0 0; font-size: 1.1em; }
+.underline { text-decoration: underline; }
+input:focus, textarea:focus { border: 1px solid #333; }
+a { cursor: pointer; }
+em { font-style: italic; }
+strong { font-weight: bold; }
+h1, h2, h3, h4, h5, h6 { font-weight:normal; }
+
+/* general font styles */
+body { font-family: Verdana, Arial, sans-serif; line-height:1.125em; /* 18px */; margin-bottom: 20px; }
+p { margin: 1.286em 0; /* 18px */ font-size:0.85em; } 
+h1 { position: absolute; top: 6px; font-size: 1.375em; /* 22px */ line-height: 1.636em;/* 36px */ }
+blockquote { margin: 1em 2em; font-style: italic; }
+
+/* general colors */
+body { background: #fff; color: #333; }
+/*body { position: relative; background: url(/images/bg.gif) no-repeat 0 0; }*/
+p { color: #333; }
+a, .purp, h1 { color: #ac1b69; }
+ul#menu li a { color: #000; }
+#main, ul#menu li, a#lyris-login { background: #feefee; border: 1px solid #ccc; }
+
+/* login */
+#login-wrap { margin: 150px auto 0 auto; width: 600px; }
+#login-wrap h2 { color: #00aad3; font-size: 1.4em; display:inline; margin-top: 17px; height:27px; }
+#login-wrap a#lyris-login { text-decoration: none; padding: 5px; padding-bottom: 12px; display: block; }
+#login-wrap a#lyris-login img { margin: 0 3px -7px 0; }
+#login-box { background: #c8c888; padding: 20px; margin: 10px 0; border: 1px solid #9d9d5e; -moz-border-radius: 15px; -khtml-border-radius: 15px; -webkit-border-radius: 15px; }
+#login-box .row { width: 560px; }
+#login-box label { display: block; width: 272px; }
+#login-box input { width: 260px; }
+#login-box input#submit { margin-top: 10px; width: 100px; }
+#forgot-password { margin-top: 15px; padding: 20px; border: 1px solid #ccc; background: #f8f8f8; }
+#forgot-password label { display: block; }
+
+/* error messages */
+#errorExplanation h2 { display: none; }
+#errorExplanation { padding: 6px; margin: 10px 4px; }
+#errorExplanation li { padding: 6px 0; font-size: 1em; font-weight: normal; list-style: circle; }
+
+table.permissions tr td {
+	text-align: center;
+}

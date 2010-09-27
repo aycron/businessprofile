@@ -1,0 +1,11 @@
+<dl>
+	<dt>
+		<label> <%= column.label %></label>
+	</dt>
+	<dd>
+		<select id="record_tab_type_<%=@record.id%>" name="record[tab_type]" onchange="hideOptions(<%= !@record.tab_type.nil? ? @record.id : 0 %>,<%= @record.tab_type.nil? %>);">
+			<option value="texto" <%= (@record.nil? || @record.tab_type == 'text') ? 'selected=selected' : '' %>>Texto</option>
+			<option value="video" <%= @record.tab_type == 'video' ? 'selected=selected' : '' %>>Video</option>
+		</select>
+	</dd>
+</dl>

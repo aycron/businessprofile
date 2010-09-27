@@ -1,0 +1,18 @@
+<dl>
+	<% columns.each :for => @record do |column| %>
+  		<% if column.is_a? ActiveScaffold::DataStructures::ActionColumns -%>
+    		<dt><%= column.name -%></dt>
+    		<dd><%= render :partial => 'show_columns' %></dd>
+  		<% else -%>
+			<% if (column == :video_url || column == :content) %>
+				<% if (column == :video_url && @record.tab_type == 'video') || (column == :content && @record.tab_type == 'texto') -%>
+					<dt><%= column.label -%></dt>
+    				<dd><%= get_column_value(@record, column) -%> &nbsp;</dd>
+				<% end %>
+			<% else %>
+				<dt><%= column.label -%></dt>
+    			<dd><%= get_column_value(@record, column) -%> &nbsp;</dd>
+			<% end %>
+		<% end -%>
+	<% end -%>
+</dl>

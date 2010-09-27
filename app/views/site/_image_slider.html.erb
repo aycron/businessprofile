@@ -1,0 +1,5 @@
+<%=image_tag @profile.gallery_images[@position].image.url(:main) if @profile.gallery_images[@position] %>
+<center>
+	<%= link_to_remote(image_tag('/images/site/Left-arrow.png'), :url => { :action => 'show_prev_image', :profile_id => @profile.id, :position => @position }, :html => { :style => 'color: white;', :onclick => "_gaq.push(['_trackEvent', 'Clicks', 'Gallery', '', #{@configurations[:image_gallery]}]);" }) if @position >= 1 %>
+	<%= link_to_remote(image_tag('/images/site/Right-arrow.png'), :url => { :action => 'show_next_image', :profile_id => @profile.id, :position => @position }, :html => { :style => 'color: white;', :onclick => "_gaq.push(['_trackEvent', 'Clicks', 'Gallery', '', #{@configurations[:image_gallery]}]);" }) if @position < @profile.gallery_images.size-1 %>
+</center>

@@ -1,0 +1,19 @@
+<h1>Configuración de Google Analytics</h1>
+
+<% form_for 'ga_config', :url => { :action => "update" } do |f| %>
+	<table>
+		<thead>
+			<tr>
+				<th>Evento</th>
+				<th>Valor</th>
+				<th></th>
+			</tr>
+		</thead>
+	
+		<tbody>
+			<%= render :partial => 'event', :collection => @configurations if @configurations%>
+		</tbody>
+	</table>
+	<br/>
+	<%= submit_tag 'Actualizar'%>
+<% end %>

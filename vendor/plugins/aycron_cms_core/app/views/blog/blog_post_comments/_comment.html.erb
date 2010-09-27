@@ -1,0 +1,7 @@
+<div id = "blog_comment_<%=comment.id%> " class ="blog_comments">
+                <a class="blog_comment_title" href="<%=comment.url%>" target="_blank"><%=comment.name %></a>
+                <h5 class="h5_comment"><%=comment.date.strftime("%A %B %d, %H:%M") + comment.created_at.strftime("%p").downcase %></h5>
+                <p>
+                    <%=comment.blog_post_comment_text %>
+                </p>
+            </div>

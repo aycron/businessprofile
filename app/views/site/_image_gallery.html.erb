@@ -1,0 +1,5 @@
+<div style="width: 550px;position: relative;left:70px;">
+	<% @gallery_images.each do |image| %>
+		<a href="<%=image.image.url(:main)%>" rel="lightbox" title=""><%= image_tag image.image.url(:thumb), :height => '105' %></a>
+	<% end %>
+</div>

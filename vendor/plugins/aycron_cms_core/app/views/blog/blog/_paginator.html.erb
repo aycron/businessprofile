@@ -1,0 +1,8 @@
+<%if @actual_page.to_i != 1 %>	
+	<li><a id="paginate-left" href="?page_number=<%= (@actual_page.to_i-1).to_s %>"> Previous </a></li>
+<%else%>
+	<span style="padding-right:76px;"></span>
+<%end%>
+<%if @actual_page.to_i < @last_page.to_i %>					   
+	<li><a id="paginate-right" href="?page_number=<%= (@actual_page.to_i+1).to_s %>"> Next </a></li>
+<%end%>	

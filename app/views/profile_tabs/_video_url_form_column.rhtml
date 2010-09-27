@@ -1,0 +1,11 @@
+<%debugger%>
+<div id="video_url_div_<%=@record.id%>" style="<%= (@record.tab_type!='video') ? "visibility: hidden;" : "visibility: visible;" %>">
+	<dl>
+		<dt>
+			<label> <%= column.label %> </label>
+		</dt>
+		<dd>
+			<%= form_column(active_scaffold_config.columns[:video_url]) %> 
+		</dd>
+	</dl>
+</div>

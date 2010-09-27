@@ -1,0 +1,26 @@
+<%= render :partial => '/blog/blog/blog_navigation' %>
+<div id="scroll" class="body-blog">
+    <ul class="list-post">
+        <p class="blog_post_title">
+            <%=@blogPost.title %>
+        </p>
+        <h5 class="h5"><%= @blogPost.date.strftime("%A %B %d, %H:%M") + @blogPost.date.strftime("%p").downcase %>, <a class="blog_cat" href="/fun/blog/category/<%=@blogPost.blog_category_id%>"><%= @blogPost.blog_category.name %></a></h5>
+        <div class="content-post">
+            <p>
+                <%=	@blogPost.blog_post_text %>
+            </p>
+        </div>
+        <div class="clear">
+        </div>
+        <div id="blog_content_comments" class ="blog_content_comments">
+            <%= render :partial => 'comment', :collection => @blogPost.validated_comments %>
+        </div>
+        <div id="blog_comments_form" class="blog_comments_form">
+          <%= render :partial => 'new_blog_post_form' %>        
+				</div>
+        <div class="clear">
+        </div>
+    </ul>
+</div>
+<div class="clear">
+</div>

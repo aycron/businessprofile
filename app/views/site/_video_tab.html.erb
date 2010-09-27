@@ -1,0 +1,12 @@
+<script type='text/javascript' src='/javascripts/swfobject.js'></script>
+ 
+<div id='mediaspace'></div>
+ 
+<script type='text/javascript'>
+  var so = new SWFObject('/flash/player.swf','mpl','425','240','9');
+  so.addParam('allowfullscreen','true');
+  so.addParam('allowscriptaccess','always');
+  so.addParam('wmode','opaque');
+  so.addVariable('file','<%= object.video_url %>');
+  so.write('mediaspace');
+</script>

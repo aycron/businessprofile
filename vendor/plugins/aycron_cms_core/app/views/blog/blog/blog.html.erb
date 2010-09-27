@@ -1,0 +1,10 @@
+<div id="blog" class="larabar-scroll content-blog">
+	<%= render :partial => 'blog_navigation' %>
+	<div id="scroll" class="body-blog">
+		<ul class="list-post">
+			<%= render :partial => 'blogpost', :collection => @blogPosts%>
+		</ul>
+	<%= render :partial => 'paginator' %>	
+	</div>
+	<div class="clear"></div>
+</div>

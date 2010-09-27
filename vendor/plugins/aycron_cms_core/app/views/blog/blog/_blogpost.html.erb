@@ -1,0 +1,34 @@
+<li id="blog_post_<%=blogpost.id%>">
+    <p class="blog_post_title">
+        <%=blogpost.title %>
+    </p>
+    <h5 class="h5"><%=	blogpost.date.strftime("%A %B %d, %H:%M") + blogpost.date.strftime("%p").downcase %>, <a class="blog_cat" href="/blog/category/<%=blogpost.blog_category.to_param%>"><%= blogpost.blog_category.name %></a></h5>
+    <div class="content-post">
+        <%=	blogpost.blog_post_text %>
+    </div>
+    <div class="clear">
+    </div>
+    <ol class="calification">
+        <li class="cal_comment">
+            <%= link_to_remote(	"comments", :update => "blog",
+            :url => {:controller=> :blog_post_comments, :action => :blog_comments_show ,
+            :blog_post_id =>"#{blogpost.id.to_s}"}) %>
+        </li>
+        <li class="cal_comment_number">
+            <%="&nbsp;[#{blogpost.validated_comments_length()}]&nbsp;|&nbsp;" %>
+        </li>
+        <li>
+            <a href='<%="/blog/link/#{blogpost.to_param}"%>' title="permalink">permalink</a>
+        </li>
+        <li class="cal_comment_number">
+            <%="&nbsp;|&nbsp;" %>
+        </li>
+        <li class="cal_comment_rating">
+            <ol class="post_rating"  id="post_rating_<%= blogpost.id %>">
+				<% #RatingsRenderer.new(self, blogpost.id).render(blogpost.avg_rating) %>				
+            </ol>
+        </li>
+    </ol>
+    <div class="clear">
+    </div>
+</li>

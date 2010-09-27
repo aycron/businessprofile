@@ -1,0 +1,284 @@
+<div id="column-left">
+    <!-- Section 1 -->
+    <div id="section-1">
+        <script>
+            FB.init({
+                status: true, // check login status
+                cookie: true, // enable cookies to allow the server to access the session
+                xfbml: true // parse XFBML
+            });
+        </script>
+        <div id="section-1-header">
+        </div>
+        <div id="section-1-body">
+            <div id="section-1-top">
+            	<% unless @profile.logo.nil? || @profile.logo.url(:logo) == '/logos/logo/missing.png' %>
+                	<div id="section-1-logo" style="float: left;">
+                    	<%=image_tag @profile.logo.url(:logo) %>
+	                </div>
+				<% end %>
+                <div id="section-1-tools" style="float: right;">
+                    <!-- Facebook Like -->
+					<% unless @profile.facebook_url.blank? %>
+                    	<div id="section-1-tools-like">
+                         	<iframe src="http://www.facebook.com/plugins/like.php?href=<%=@profile.facebook_url%>&amp;layout=button_count&amp;show_faces=true&amp;width=50&amp;action=like&amp;font=segoe+ui&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:120px; height:21px;" allowTransparency="true"></iframe>
+                    	</div><!-- Facebook Like -->
+					<% end %>
+                    <div id="section-1-tools-links">
+                        <!--
+						<%=image_tag '/images/site/s1-imprimir.png' %><a class="tool-link" onclick="print();_gaq.push(['_trackEvent', 'Clicks', 'Imprimir', '', <%=@configurations['print']%>]);" href="#">Imprimir</a>						
+                        &nbsp;<%=image_tag '/images/site/s1-separator.png' %>&nbsp;<%=image_tag '/images/site/s1-mail.png' %><a class="tool-link" href="mailto:&subject=<%=@profile.mail_subject%>&body=<%=@profile.mail_body%>" onclick="_gaq.push(['_trackEvent', 'Clicks', 'Recomendar', '', <%=@configurations['send_by_mail']%>]);">Enviar por Correo</a>
+                        &nbsp;<%=image_tag '/images/site/s1-separator.png' %>
+						-->
+						<%=image_tag '/images/site/s1-imprimir.png' %><a class="tool-link" onclick="print();pageTracker._trackPageview('/imprimir');" href="#">Imprimir</a>						
+                        &nbsp;<%=image_tag '/images/site/s1-separator.png' %>&nbsp;<%=image_tag '/images/site/s1-mail.png' %><a class="tool-link" href="mailto:&subject=<%=@profile.mail_subject%>&body=<%=@profile.mail_body%>" onclick="javascript:pageTracker._trackPageview('/recomendar');">Enviar por Correo</a>
+                        &nbsp;<%=image_tag '/images/site/s1-separator.png' %>						
+                    </div>
+                    <!-- AddThis Button BEGIN -->
+                    <div id="section-1-tools-addthis">
+                        <div class="addthis_toolbox addthis_default_style">
+                        	<!--
+                            <a class="addthis_button_facebook" onclick="_gaq.push(['_trackEvent', 'Clicks', 'Facebook', '', <%=@configurations['facebook']%>]);"></a>
+							<a class="addthis_button_twitter" onclick="_gaq.push(['_trackEvent', 'Clicks', 'Twitter', '', <%=@configurations['twitter']%>]);"></a>
+							-->
+							<a class="addthis_button_facebook" onclick="javascript:pageTracker._trackPageview('/facebook');"></a>
+							<a class="addthis_button_twitter" onclick="javascript:pageTracker._trackPageview('/twitter');"></a>
+                        </div>
+                    </div>
+                    <!-- AddThis Button END -->
+                </div>
+            </div>
+            <div id="section-1-title">
+                <%=@profile.title %>
+            </div>
+            <div id="section-1-description">
+                <%=@profile.description %>
+            </div>
+            <div id="section-1-address">
+                <%=@profile.address %>
+            </div>
+            <div id="section-1-phones">
+                <!--
+				<b><%= link_to_remote ('Ver Teléfonos', { :url => { :action => :show_phone, :id => @profile.id }}, { 
+															:style => 'color: #666;', :id => 'phone_link', 
+															:onmouseover => "jQuery('#phone_link').css('color', 'black')", 
+															:onmouseout => "jQuery('#phone_link').css('color', '#666666')", 
+															:onclick=>"_gaq.push(['_trackEvent', 'Clicks', 'Phones', '', #{@configurations['phone']}]);" }) if @profile.phones %></b>
+				-->
+					<b><%= link_to_remote ('Ver Teléfonos', { :url => { :action => :show_phone, :id => @profile.id }}, { 
+															:style => 'color: #666;', :id => 'phone_link', 
+															:onmouseover => "jQuery('#phone_link').css('color', 'black')", 
+															:onmouseout => "jQuery('#phone_link').css('color', '#666666')", 
+															:onclick=>"javascript:pageTracker._trackPageview('/telefono');" }) if @profile.phones %>
+															</b>
+	
+            </div>
+            <div id="section-1-website">
+                <!-- <%= @profile.site_link_name %>&nbsp;<a class="section-1-link" href="<%=@website%>" target="_blank" onclick="_gaq.push(['_trackEvent', 'Clicks', 'Website', '', <%=@configurations['website']%>]);"><%= @profile.website %></a>-->
+				<%= @profile.site_link_name %>&nbsp;<a class="section-1-link" href="<%=@website%>" target="_blank" onclick="javascript:pageTracker._trackPageview('/website');"><%= @profile.website %></a>
+            </div>
+        </div>
+        <div id="section-1-footer">
+        </div>
+    </div>
+    <!-- Section 1 --><!-- Section 3 -->
+	<% unless @profile.profile_tabs.empty? %>
+		<div id="section-3">
+			<div id="tabs">
+   				<ul id="ul_tab">
+   					<% @profile.profile_tabs.each do |pt| %>
+						<!--<li><a href="#fragment-<%= pt.position %>" onclick="_gaq.push(['_trackEvent', 'Clicks', 'Tabs', '', <%=@configurations['tabs']%>]);"><b><%= pt.name %></b></a></li>-->
+						<li><a href="#fragment-<%= pt.position %>" onclick="javascript:pageTracker._trackPageview('/tabs');"><b><%= pt.name %></b></a></li>
+					<% end %>
+   				</ul>
+				<div id="section-3-header"></div>
+			
+				<% @profile.profile_tabs.each do |pt| %>
+					<div id="fragment-<%= pt.position %>">
+						<% if pt.tab_type == 'texto' %>
+							<div style="width: 564px;">
+								<%= pt.content %>
+							</div>
+						<% end %>
+					
+						<% if pt.tab_type == 'video' %>
+							<center><%= render :partial => 'video_tab', :object => pt %></center>
+						<% end %>
+   					</div>
+				<% end %>
+				<div id="section-3-footer"></div>
+			</div>
+		</div>
+	<% end %>
+    <!-- Section 3 --><!-- Section 6 -->
+	<% unless @profile.gallery_images.empty? %>
+    	<div id="section-6">
+        	<div id="section-6-header">
+        	</div>
+        	<div id="section-6-body">
+        		<div>
+            	<div id="section-6-title">
+	               	<%=@profile.gallery_title %>
+    	        </div>
+			   	<div id="section-6-toolbar">
+            		<% unless params[:gallery_open] %>
+                		<%= link_to(!@profile.gallery_label.blank? ? @profile.gallery_label : "Ver Galeria de Productos", { :action => :show_profile, :profile_id => @profile.url, :gallery_open => true, :anchor => 'section-6-main' }, { :class => 'tool-link' }) %>
+					<% else %>
+						<%= link_to("Volver", { :action => :show_profile, :profile_id => @profile.url, :anchor => 'section-6-main' }, { :class => 'tool-link' }) %>&nbsp;<%= will_paginate @gallery_images if @gallery_images %>
+					<% end %>
+            	</div>
+				</div>
+        	    <div id="section-6-main">
+            		<% unless params[:gallery_open]%>
+                		<%=image_tag @profile.gallery_images.first.image.url(:main) %>
+						<center>
+							<!--<%= link_to_remote image_tag('/images/site/Right-arrow.png'), :url => { :action => 'show_next_image', :profile_id => @profile.id }, :html => { :style => 'color: white;', :onclick => "_gaq.push(['_trackEvent', 'Clicks', 'Gallery', '', #{@configurations['image_gallery']}]);" } unless @profile.gallery_images[1].nil? %>-->
+							<%= link_to_remote image_tag('/images/site/Right-arrow.png'), :url => { :action => 'show_next_image', :profile_id => @profile.id }, :html => { :style => 'color: white;', :onclick => "javascript:pageTracker._trackPageview('/gallery');" } unless @profile.gallery_images[1].nil? %>							
+						</center>
+					<% else %>
+						<%= render :partial => 'image_gallery' %>
+					<% end %>
+            	</div>
+        	</div>
+        	<div id="section-6-footer">
+        	</div>
+    	</div>
+	<% end %>
+    <!-- Section 6 -->
+</div>
+<div id="column-right">
+   <%=javascript_include_tag 'roundborder'%>
+    <!-- Section 2 -->
+	<% unless @profile.image.url(:box) == '/images/box/missing.png' %>
+    	<div id="section-2">
+        	<div id="imagewrapper">
+            	<%=image_tag(@profile.image.url(:box), :id => 'section-2-image') %>
+        	</div>
+    	</div>
+	<% end %>
+    <!-- Section 2 -->
+    <!-- Section 4 -->
+    <div id="section-4">
+        <div id="section-4-header">
+        	<label id="section-4-header-label">Contáctanos</label>
+        </div>
+        <div id="section-4-body">
+        	<center>
+        		<span style="color: green"><%= flash[:contact_notice] %></span>
+				<span style="color: red"><%= flash[:contact_error] %></span>
+			</center>
+          	<% form_for :send_email, :url => { :action => 'send_email', :id => @profile.id }, :html => { :name => 'email_form' } do |f|%>
+            	<div class="form-text-field">
+                	<div class="form-label">
+                    	Nombre:
+                	</div>
+                	<div class="text-box-div">
+                    	<%=text_field(:contact, :name, :size => 38, :class => 'text-box') %>
+                	</div>
+            	</div>
+            	<div class="form-text-field">
+                	<div class="form-label">
+                    	Apellido:
+                	</div>
+                	<div class="text-box-div">
+                    	<%=text_field(:contact, :surname, :size => 38, :class => 'text-box') %>
+                	</div>
+            	</div>
+            	<div class="form-text-field">
+                	<div class="form-label">
+                    	E-mail:
+                	</div>
+                	<div class="text-box-div">
+                    	<%=text_field(:contact, :email, :size => 38, :class => 'text-box') %>
+                	</div>
+            	</div>
+            	<div class="form-area-field">
+                	<div class="form-label">
+	                    Mensaje:
+    	            </div>
+					<div class="text-area-div">
+					<!--[if !IE]>-->			
+						<%=text_area(:contact, :message, :cols => 29, :rows => 5, :class => 'text-area', :id => 'contact_text_area') %>
+					<!--<![endif]-->
+        	        <!--[if IE]>			
+						<%=text_area(:contact, :message, :cols => 30, :rows => 5, :class => 'text-area') %>						
+					<![endif]-->						
+					</div>
+            	</div>
+            	<div class="form-buttom-field">
+               		<!--<a onclick="_gaq.push(['_trackEvent', 'Clicks', 'Contactanos', '', <%=@configurations['contact']%>]);submitEmail();" id="link_to_send_mail" style="cursor: pointer">
+               			<span id="section-4-button-label">Enviar</span>
+               			<%= image_tag '/images/site/s4-enviar.png' %>
+					</a>-->
+					<a onclick="pageTracker._trackPageview('/contactanos');submitEmail();" id="link_to_send_mail" style="cursor: pointer">
+               			<span id="section-4-button-label">Enviar</span>
+               			<%= image_tag '/images/site/s4-enviar.png' %>
+					</a>			
+            	</div>
+			<% end %>
+        </div>
+        <div id="section-4-footer">
+        </div>
+    </div>
+    <!-- Section 4 -->
+	
+    <!-- Section 5 -->
+	<%=javascript_include_tag 'googlemaps'%>
+    <div id="section-5">
+    	<div id="section-5-header">
+    		<label id="section-5-header-label">Locación</label>
+    	</div>
+		<div id="section-5-body">
+			<div id="section-5-body-map"></div>
+			<div id="section-5-arrow-pad">
+				<div id="section-5-up_arrow">
+					<a onclick="moveOnMap(0,-20);" class="link_s5"><%= image_tag '/images/map/Mapa-flecha-arriba.png', :height => '12px;' %></a>
+				</div>
+				<div id="section-5-down_arrow">
+					<a onclick="moveOnMap(0,20);" class="link_s5"><%= image_tag '/images/map/Mapa-flecha-abajo.png', :height => '12px;' %></a>
+				</div>
+				<div id="section-5-left_arrow">
+					<a onclick="moveOnMap(-20,0);" class="link_s5"><%= image_tag '/images/map/Mapa-flecha-izquierda.png', :height => '16px;' %></a>
+				</div>
+				<div id="section-5-right_arrow">
+					<a onclick="moveOnMap(20,0);" class="link_s5"><%= image_tag '/images/map/Mapa-flecha-derecha.png', :height => '16px;' %></a>
+				</div>
+			</div>
+			<div id="section-5-zoomout">
+				<a onclick="setZoomOut();" class="link_s5"><%= image_tag '/images/map/Mapa-zoom_out.png', :height => '32px;' %></a>
+			</div>
+			<div id="section-5-zoomin">
+				<a onclick="setZoomIn();" class="link_s5"><%= image_tag '/images/map/Mapa-zoom_in.png', :height => '32px;' %></a>
+			</div>
+			<div id="section-5-print">
+				<!--<%= link_to(image_tag('/images/map/Mapa-imprimir.png', :height => '32px;'), 
+						{ :action => 'print_map', :id => @profile.id },
+						{ :target => '_blank', :class => "link_s5", :onclick => "_gaq.push(['_trackEvent', 'Clicks', 'PrintMap', '', #{@configurations['print_map']}]);" }) %>
+				-->
+				<%= link_to(image_tag('/images/map/Mapa-imprimir.png', :height => '32px;'), 
+						{ :action => 'print_map', :id => @profile.id },
+						{ :target => '_blank', :class => "link_s5", :onclick => "javascript:pageTracker._trackPageview('/printMap');" }) %>
+			</div>			
+		</div>
+		<div id="section-5-footer"></div>
+    </div>
+    <!-- Section 5 -->
+</div>
+
+<script type="text/javascript">
+	setProfileMap(<%= @marker ? @marker.lat : 0 %>,<%= @marker ? @marker.lng : 0 %>);
+				
+	function submitEmail(){
+  		document.email_form.submit();
+	}
+	
+  	jQuery(document).ready(function(){
+    	jQuery("#tabs").tabs();
+		jQuery('#ul_tab').removeClass('ui-widget-header');
+  	});
+	
+	if (jQuery.browser.webkit) {
+    	jQuery('#contact_text_area').attr('cols', 30)
+ 	}
+  
+</script>

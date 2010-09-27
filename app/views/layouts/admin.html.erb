@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= controller.controller_name.camelize %></title>
+  <%= stylesheet_link_tag 'aycron_cms_core/admin' %>
+  <%= stylesheet_link_tag 'admin' %>
+  <%= stylesheet_link_tag 'aycron_cms_core/multiple_file_upload' %>
+  <%= javascript_include_tag 'aycron_cms_core/multiple_file_upload' %>
+  <%= javascript_include_tag :fckeditor %>
+  <%= javascript_include_tag :defaults %>
+  <%= active_scaffold_includes %>
+  <script type="text/javascript">
+	function hideOptions(recordId,new_record) {
+		if (new_record) {
+			if (document.getElementById('record_tab_type_').value == 'video') {
+				document.getElementById('video_url_div_').style.visibility = "visible";
+				document.getElementById('content_div_').style.visibility = "hidden";
+			}
+			else {
+				document.getElementById('video_url_div_').style.visibility = "hidden";
+				document.getElementById('content_div_').style.visibility = "visible";
+			}
+		}
+		else {
+			if (document.getElementById('record_tab_type_' + recordId).value == 'video') {
+				document.getElementById('video_url_div_' + recordId).style.visibility = "visible";
+				document.getElementById('content_div_' + recordId).style.visibility = "hidden";
+			}
+			else {
+				document.getElementById('video_url_div_' + recordId).style.visibility = "hidden";
+				document.getElementById('content_div_' + recordId).style.visibility = "visible";
+			}
+		}
+	}
+  </script>
+</head>
+<body>
+
+<div class="menuDiv">
+	<%= image_tag('/images/logo150x57.jpg', :width => '100') %>
+	<% @role_controllers = current_user.role.role_controllers.collect{|rc| rc.controller if rc.can_view }
+		is_super = current_user.role.is_super_admin
+	 %>
+	<table class="menu">
+		<% if is_super %>
+			<tr><td><%= link_to('Profiles', profiles_path) %></td></tr>
+		<% else %>
+			<tr><td><%= @role_controllers.include?('UserProfiles') ? link_to('Profiles', user_profiles_path) : "" %></td></tr>
+		<% end %>
+		<tr><td><%= @role_controllers.include?('Pages') || is_super ? link_to('Pages', pages_path) : ""  %></td></tr>
+		<tr class="separator"><td>&nbsp;</td></tr>
+		<tr><td><%= @role_controllers.include?('Options') || is_super ? link_to('Options', options_path) : "" %></td></tr>
+		<tr><td><%= @role_controllers.include?('Users') || is_super ? link_to('Users', users_path) : ""  %></td></tr>
+		<tr><td><%= @role_controllers.include?('Roles') || is_super ? link_to('Roles', roles_path) : "" %></td></tr>
+		<!--<tr class="separator"><td>&nbsp;</td></tr>
+		<tr><td><%= @role_controllers.include?('GaConfig') || is_super ? link_to('Configuración de GA', ga_config_path) : "" %></td></tr>-->
+		<tr class="separator"><td>&nbsp;</td></tr>
+	    <tr><td><%= link_to('Logout', logout_path) %></td></tr>
+	</table>
+	<br>
+</div>
+
+<div class="content">
+	<p style="color: green"><%= flash[:notice] %></p>
+	<p style="color: red"><%= flash[:warning] %></p>
+	<%= yield  %>
+</div>
+
+</body>
+</html>

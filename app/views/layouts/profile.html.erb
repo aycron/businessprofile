@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta property="og:site_name" content="<%=@profile.title%>"/>
+        <meta property="og:image" content="<%=@profile.title%>"/>
+		<meta name="description" content="<%= @profile.meta_description %>" />
+		<meta name="keywords" content="<%= @profile.meta_keywords %>" />
+		<% if not @profile.meta_verify_v1.nil? %>
+			<meta name="verify-v1" content="<%= @page.meta_verify_v1 %>" />
+		<% end %>
+        <title><%=@profile.title %></title>
+		<%= javascript_include_tag 'prototype.js', 'scriptaculous.js?load=effects,builder', 'jquery-1.4.2.js' %>
+		<script>
+			jQuery.noConflict();
+		</script>
+		<%= javascript_include_tag 'lightbox.js', 'jquery-ui-1.8.2.custom.min.js' %>
+        <%= stylesheet_link_tag 'lightbox.css', 'jquery-ui-1.8.2.custom.css','businessprofile' %>
+        <!-- Facebook I Like Script -->
+        <script type="text/javascript" src="http://connect.facebook.net/en_US/all.js"></script>
+        <!-- Add This Script -->
+        <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=xa-4c17823205d96963"></script>
+        <!-- Google Maps API -->
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script type="text/javascript">
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+			<script type="text/javascript">
+			try{ 
+				var pageTracker = _gat._getTracker('<%= @google_analytics %>');
+				pageTracker._trackPageview();
+			} catch(err) {} 
+		</script>
+	</head>
+    <body style="background-color: #f3f4ef;">
+        <div align="center">
+            <div id="main" align="left">
+                <div id="body">
+                	<p style="color: green"><%= flash[:notice] %></p>
+					<p style="color: red"><%= flash[:error] %></p>
+					
+                    <%= yield %>
+                </div>
+                <div id="footer">
+                   	<hr style="width: 985px;float: left;">
+                   	<div id="footer-div">
+                   		<hr style="width: 985px;float: left;">
+                   		<div id="footer-div-pages">
+                            <% for page in @pages %>
+							  <%=link_to page.title, {:controller => "site", :action => "page", :page_name => page.name}, :class => "footer_link" %>
+                              <% if @pages.index(page) != @pages.length - 1 %>
+                                &nbsp;&nbsp;|&nbsp;&nbsp;
+							  <%end %>
+                            <%end %>
+                        </div>
+                        <div id="footer-div-copyright">
+                            <%=@footer_text %>
+                        </div>
+                        <div id="footer-div-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

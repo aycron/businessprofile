@@ -1,0 +1,13 @@
+<li id="attachment_<%= attachment.id %>">
+	<input id="pos_attachment_<%= attachment.id %>" name="pos_attachment_<%= attachment.id %>" value="<%= attachment.position %>" style="position:absolute; left: -1000px;">
+	<a href="#" onclick="return file_up(this);"
+	>Up</a><a href="#" onclick="return file_down(this);"
+	>Down</a><a href="<%= attachment.public_filename %>" class="filename"><%
+	 if IMAGE_MIME_TYPES.include? attachment.content_type 
+		%><%= image_tag attachment.public_filename(:thumb) %><% else 
+	%><%= attachment.filename %><%
+	end %>
+	</a>
+	<a href="#" onclick="return file_remove(this, false);">Remove</a>
+	<input name="record[<%= association %>][<%= attachment.id %>][id]" type="hidden" value="<%= attachment.id %>">
+</li>

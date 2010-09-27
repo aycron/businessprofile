@@ -1,0 +1,18 @@
+<% klass = column.association.class_name.underscore %>
+<% association = column.association.name %>
+<% fields_for column.association.klass.new do |attachment| -%>
+	<%= attachment.file_field :data %>
+<% end -%>
+<ul id="<%=association%>_pending_files" class="pending_files">
+	<% if @record.send(association).size > 0 -%>
+		<% if sorted %>
+			<%= render :partial => "attachments/attachment", :collection => record.send(association), :locals => { :association => association } %>	
+		<% else -%>
+			<%= render :partial => "attachments/attachment_no_sort", :collection => record.send(association), :locals => { :association => association } %>	
+		<% end -%>
+	<% end -%>
+</ul>
+<script type="text/javascript">
+	var multi_selector = new MultiSelector($('<%=association%>_pending_files'), <%= max_number %>, "<%=association%>", <%=@record.send(association).size%>, <%= sorted.to_s %>);
+	multi_selector.addElement($('<%=klass%>_data'));
+</script>

@@ -1,0 +1,62 @@
+AycronCmsCore
+=============
+
+This is the CMS built by Aycron based on ActiveScaffold. 
+
+Requirements
+============
+- ActiveScaffold plugin
+
+Plugins Used
+============
+fckeditor 0.5 - Scott Rutherford
+exception_notification - Jamis Buck
+action_mailer_tls - Marc Chung
+attachment_fu - technoweenie 
+acts_as_list - David Heinemeier Hansson
+render_component - David Heinemeier Hansson
+rollover_beethoven - Jon Marshal Smith
+
+Example
+=======
+
+- When installed, the following urls will be avaible:
+
+/admin
+/admin/roles
+/admin/users
+/admin/options
+/admin/options_super
+
+- Fckeditor will be available for ActiveScaffold:
+    config.columns[:text].form_ui = :fckeditor
+  Constant FCKEDITOR_S3_ACTIVE will allow or not S3 for fckeditor (default=false)
+
+- Mailer will have TLS capabilities (for gmail)
+
+- aycron_cms_core/config/constants.rb has settings to be setup! Copy the file to /config/initializers
+
+- aycron_cms_core/public files will have to be copied to application public directory
+
+- aycron_cms_core/db/migrate files will have to be copied to application migrations directory
+
+
+- edit /config/environment/production.rb and add:
+
+	# fix to make Exception Notifier work on Rails 2.3 !!!
+	config.after_initialize do
+	  ExceptionNotifier.exception_recipients = EXCEPTION_NOTIFIER_TO
+	  ExceptionNotifier.email_prefix = EXCEPTION_NOTIFIER_PREFIX
+	  ExceptionNotifier.sender_address = EXCEPTION_NOTIFIER_FROM
+	end
+	
+	# This will rotate log files. It'll generate up to 50 log files of 1 megabyte each.
+	# WON'T WORK ON WINDOWS AND ON RAKE TASKS
+	if ENV['RAKE'].to_s != 'true' and not (RUBY_PLATFORM =~ /(:?mswin|mingw)/)
+	  config.logger = Logger.new(config.log_path, 10, 10.megabyte)
+	  config.logger.level = Logger::INFO
+	end
+
+- edit /app/controllers/application_controller.rb, make it inherit from AasApplicationController
+
+Copyright (c) 2009 Aycron It Solutions, released under the MIT license

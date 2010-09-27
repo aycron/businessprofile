@@ -1,0 +1,129 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+div.menuDiv {
+	width:123px;
+	margin: 20px 20px 0px 20px;
+	height: 100%;
+	float: left;
+	display: block;
+	border-right: 1px solid #ccc;
+}
+div.content {
+	width: 80%;
+	float: left;
+	display: block;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	padding-top: 5px;
+}
+input[type='text'] {
+	width: 300px;
+}
+input[type='password'] {
+	width: 300px;
+}
+a, a:visited { color: blue; }
+a:hover { color: red; background-color: transparent; }
+
+table {
+	margin-top: 20px;
+    background: #fff;
+    color: #000;
+	border-collapse: collapse;
+}
+
+th {
+    border-bottom: 1px solid #ccc;
+    padding: 2px 10px;
+    background-color: #fff;
+    color: #000000;
+    text-align: center;
+    white-space: nowrap;
+	font-size: 110%;
+	font-weight: bold;
+}
+
+td {
+    border-bottom: 1px solid #ccc;
+    padding: 2px 10px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+tr:hover {
+    background-color: #f3f3f3;
+}
+
+table.menu {
+	margin-top: 20px;
+    color: #000;
+	border-collapse: separate;
+}
+
+table.menu tr:hover {
+    background-color: #95E572;
+}
+
+table.menu tr.separator {
+}
+
+table.menu tr.separator:hover {
+    background-color: white;
+}
+
+
+table.menu td {
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 0px none;
+	color: #4C7239; 
+	padding: 0px;
+}
+
+table.menu td span {
+	color: #4C7239; 
+	display: block; 
+	padding: 2px 10px;
+}
+
+table.menu td.smaller {
+	font-size: smaller;
+	letter-spacing: -1px;
+}
+
+table.menu a { text-decoration: none; color: #4C7239; display: block; padding: 2px 10px; }
+table.menu a:visited { text-decoration: none; color: #4C7239; display: block; }
+table.menu a:hover { text-decoration: none; color: #365128; display: block; background-color: transparent; }
+
+table.login td {
+    border-bottom: 0px none;
+}
+table.login {
+    margin-top: 0px;
+}
+table.login tr:hover {
+    background-color: transparent;
+}
+

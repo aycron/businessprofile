@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title>Login</title>
+	<%= stylesheet_link_tag 'aycron_cms_core/admin' %>
+	<%= javascript_include_tag :all %>
+	<%= javascript_include_tag 'aycron_cms_core/jquery' %>
+	<script language="JavaScript">
+		jQuery.noConflict();
+		jQuery(document).ready(function($){
+			$("#forgot-password").hide();
+			$("#forgot").click(function() {
+				$("#forgot-password").fadeIn();
+				return false;
+			});
+		});
+		function body_onload() {
+			document.forms[0].user_username.focus();
+		}
+	</script>
+</head>
+<body onload="body_onload();">
+	<div id="login-wrap">
+
+		<h2 class="left">Admin Login</h2>
+		<div class="clear"></div>
+		
+		<p style="color: green"><%= flash[:notice] %></p>
+		<p style="color: red"><%= flash[:warning] %></p>
+
+		<% form_tag verify_path do %>
+			<div id="login-box">
+				<div class="row">
+					<label for="user_username" class="left">Username</label>
+					<label for="user_hashed_password" class="right">Password</label>
+				</div>
+				<div class="row">
+					<%= text_field 'user', 'username', :class => "left textbox" %>
+					<%= password_field 'user', 'hashed_password', :class => "right textbox" %>
+				</div>
+				<div class="row">
+					<%= submit_tag "Sign in", :class => "right button", :id => "submit" %>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<a href="" id="forgot" alt="password">forgot password?</a>
+		<% end %>
+		<div id="forgot-password">
+			<% form_tag :action => 'forgot_password', :controller => 'authentications' do %>
+				<label for="forgot-password">Enter your email address</label>
+				<%= text_field 'user', 'email', :class => "textbox" %>
+				<%= submit_tag 'Send Reset' %>
+			<% end %>
+		</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<%  # adding fck stuff -- only thing to add is the 'before' parameter in the form remote tag
+	before = ""
+	active_scaffold_config.columns.each do |col|
+		if col.form_ui == :fckeditor
+			if active_scaffold_config.model == Option and @record.option_type != RICH_TEXT_OPTION_TYPE
+				# do nothing, all columns from OptionsController are fckeditor
+			else
+				before << fckeditor_before_js('record', col.name)
+			end
+		end
+	end
+%>
+<% url_options = params_for(:action => :create) -%>
+<%=
+if request.xhr?
+  if active_scaffold_config.create.multipart? # file_uploads
+    form_remote_upload_tag url_options.merge({:iframe => true}),
+                           :onsubmit => before + onsubmit.to_s,
+                           :id => element_form_id(:action => :create),
+                           :loading => "$('#{loading_indicator_id(:action => :create, :id => params[:id])}').style.visibility = 'visible';",
+                           :class => 'create'
+  else
+    form_remote_tag :url => url_options,
+                    :before => before,   
+                    :after => "$('#{loading_indicator_id(:action => :create, :id => params[:id])}').style.visibility = 'visible'; Form.disable('#{element_form_id(:action => :create)}');",
+                    :complete => "$('#{loading_indicator_id(:action => :create, :id => params[:id])}').style.visibility = 'hidden'; Form.enable('#{element_form_id(:action => :create)}');",
+                    :failure => "ActiveScaffold.report_500_response('#{active_scaffold_id}')",
+                    :html => {
+                      :href => url_for(url_options),
+                      :onsubmit => onsubmit,
+                      :id => element_form_id(:action => :create),
+                      :class => 'create'
+                    }
+  end
+else
+  form_tag url_options,
+           :onsubmit => before + onsubmit.to_s,
+           :id => element_form_id(:action => :create),
+           :multipart => active_scaffold_config.create.multipart?,
+           :class => 'create'
+end -%>
+
+  <h4><%= active_scaffold_config.create.label(@record.class.human_name(:count => 1)) -%></h4>
+
+  <div id="<%= element_messages_id(:action => :create) %>" class="messages-container">
+<% if request.xhr? -%>
+    <%= error_messages_for :record, :object_name => @record.class.human_name.downcase %>
+<% else -%>
+    <%= render :partial => 'form_messages' %>
+<% end -%>
+  </div>
+
+  <%= render :partial => 'form', :locals => { :columns => active_scaffold_config.create.columns } %>
+
+  <p class="form-footer">
+    <%= submit_tag as_(:create), :class => "submit" %>
+	<% if params[:adapter] == '_list_inline_adapter' %>
+    	<%= link_to as_(:cancel), params_for(:controller => params[:parent_controller] ? params[:parent_controller] : params[:controller], :action => 'list', :eid => params[:parent_controller] ? params[:parent_controller] : params[:eid], :id => nil), :class => 'cancel' %>
+	<% else %>
+		<%= link_to as_(:cancel), homeAdmin_path, :class => 'cancel' %>
+	<% end %>
+    <%= loading_indicator_tag(:action => :create, :id => params[:id]) %>
+  </p>
+
+</form>
+<script type="text/javascript">
+Form.focusFirstElement('<%= element_form_id(:action => :create) -%>');
+</script>

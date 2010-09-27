@@ -1,0 +1,19 @@
+<dl>
+	<% columns.each :for => @record do |column| %>
+  		<% if column.is_a? ActiveScaffold::DataStructures::ActionColumns -%>
+    		<dt><%= column.name -%></dt>
+    		<dd><%= render :partial => 'update_columns' %></dd>
+  		<% else -%>
+			<% @extra = case column.name 
+			when :contact_email then '<br/><b>SECCION CONTACTAME:</b><br/><hr style="width: 1025px;">'
+			when :mail_subject then '<br/><b>SECCION ENVIAR POR CORREO:</b><br/><hr style="width: 1025px;">'
+			when :gallery_title then '<br/><b>SECCION GALERIA DE IMAGENES:</b><br/><hr style="width: 1025px;">'
+			when :meta_description then '<br/><b>SECCION PARA BUSQUEDAS EN INTERNET:</b><br/><hr style="width: 1025px;">'
+			else nil				
+			end %>
+			<dt><%= @extra %></dt>
+			<dt><%= column.label -%></dt>
+    		<dd><%= get_column_value(@record, column) -%> &nbsp;</dd>
+		<% end -%>			
+	<% end -%>
+</dl>

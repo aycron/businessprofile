@@ -1,0 +1,59 @@
+<p class = "form_comment_title">
+    Add Comment
+</p>
+<p>
+    Fill out the form below to add your own comments. 
+</p>
+<%if @error_messages %>
+	<%for error in @error_messages %>
+		<p style="color: red">
+		    <%= error %>
+		</p>
+	<%end %>
+<%end %>
+<% form_remote_tag({:url => {:controller => 'blog_post_comments', :action => "blog_comment_add"},
+										:method => :post,
+										:class => "blog_post_comments_form#{@blogPost.id.to_s}",
+										:id => "form_#{@blogPost.id}" ,
+										:update => { :failure => "blog" }
+										})  do %>
+	<input type="hidden" name="comment_blog_post" value="<%=@blogPost.id%>">
+	<label for="comment_name">
+	    Your Name:
+	</label>
+	<br/>
+	<input type="text" name="comment_name" value="<%=params[:comment_name]%>" autocomplete="OFF">
+	<br/>
+	<label for="comment_email">
+	    Email:
+	</label>
+	<br/>
+	<input type="text" name="comment_email" value="<%=params[:comment_email]%>" autocomplete="OFF">
+	<br/>
+	<label for="comment_url">
+	    URL:
+	</label>
+	<br/>
+	<input type="text" name="comment_url" value="<%=params[:comment_url]%>" autocomplete="OFF">
+	<br/>
+	<label for="blog_text">
+	    Comment:
+	</label>
+	<br/>
+	<textarea name="blog_post_comment_text"  class="textarea1"><%=params[:blog_post_comment_text]%></textarea>	
+	<%= show_simple_captcha %>
+	<%= submit_tag 'Post Comment' %>
+<%end %>
+<p>
+	&nbsp;
+</p>
+<script type="text/javascript">
+    jQuery(function(){
+        // this initialises the demo scollpanes on the page.
+        jQuery('#scroll').jScrollPane({
+            showArrows: true,
+            scrollbarWidth: 19,
+            arrowSize: 16
+        });
+    });
+</script>
